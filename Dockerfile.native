@@ -1,0 +1,16 @@
+FROM oracle/graalvm-ce:latest AS builder
+RUN gu install native-image
+RUN yum install -y maven
+
+WORKDIR /world/
+COPY pom.xml /world
+RUN mvn dependency:go-offline
+
+COPY src /world/src
+RUN mvn package
+
+RUN native-image -cp ./target/HelloWorld-1.0-SNAPSHOT.jar -H:Name=HelloWorld -H:Class=HelloWorld -H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath
+
+FROM alpine:latest
+COPY --from=builder /world/HelloWorld .
+#RUN ./HelloWorld
