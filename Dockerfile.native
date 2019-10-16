@@ -11,6 +11,6 @@ RUN mvn package
 
 RUN native-image -cp ./target/HelloWorld-1.0-SNAPSHOT.jar -H:Name=HelloWorld -H:Class=HelloWorld -H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath
 
-FROM alpine:latest
+FROM bitnami/minideb:jessie
 COPY --from=builder /world/HelloWorld .
-#RUN ./HelloWorld
+CMD ./HelloWorld
