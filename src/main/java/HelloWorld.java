@@ -1,5 +1,3 @@
-package com.delabassee;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,7 +23,7 @@ public class HelloWorld {
         int fjSize = ForkJoinPool.commonPool().getPoolSize();
         int fjParellism = ForkJoinPool.commonPool().getCommonPoolParallelism();
 
-        System.out.println("Hello Bordeau, here's what I see.");
+        System.out.println("Hello World, here's what I see.");
         System.out.println("                  Java : " + System.getProperty("java.version"));
         System.out.println("          JVM 'vendor' : " + System.getProperty("java.vendor"));
         System.out.println(" Running inside Docker : " + isRunningInsideDocker());
