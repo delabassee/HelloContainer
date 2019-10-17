@@ -28,7 +28,7 @@ public class HelloWorld {
         System.out.println("Hello World, here's what I see.");
         System.out.println("                  Java : " + System.getProperty("java.version"));
         System.out.println("          JVM 'vendor' : " + System.getProperty("java.vendor"));
-        System.out.println("                  OS : : " + os);
+        System.out.println("                    OS : " + os);
         System.out.println(" Running inside Docker : " + isRunningInsideDocker());
         System.out.println("           CPU/core(s) : " + cpus);
         System.out.println(" CommonFJP parallelism : " + fjParellism);
