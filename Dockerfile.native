@@ -9,8 +9,12 @@ RUN mvn dependency:go-offline
 COPY src /world/src
 RUN mvn package
 
-RUN native-image -cp ./target/HelloWorld-1.0-SNAPSHOT.jar -H:Name=HelloWorld -H:Class=HelloWorld -H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath
+#RUN native-image --static -cp ./target/HelloWorld-1.0-SNAPSHOT.jar -H:Name=HelloWorld -H:Class=HelloWorld -H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath 
 
-FROM bitnami/minideb:jessie
+RUN native-image --static -cp ./target/HelloWorld-1.0-SNAPSHOT.jar -H:Name=HelloWorld -H:Class=HelloWorld -H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath --auto-fallback
+
+#FROM bitnami/minideb:jessie
+#FROM scratch
+FROM busybox:latest
 COPY --from=builder /world/HelloWorld .
-CMD ./HelloWorld
+ENTRYPOINT ./HelloWorld
